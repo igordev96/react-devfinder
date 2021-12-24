@@ -17,6 +17,17 @@ export const Container = styled.div`
   .glass {
     font-size: 3rem;
     color: #1f4caf;
+    animation: rotate 2s ease-in-out 0s alternate infinite;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(-90deg);
+    }
   }
 
   input {

@@ -2,7 +2,7 @@ import { Container } from "./style";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export function Card({devInput, setDevInput}) {
+export function Card({ devInput }) {
   const [info, setInfo] = useState({});
 
   const verifyNull = (item, txt) => {
@@ -14,8 +14,14 @@ export function Card({devInput, setDevInput}) {
   };
 
   const getUser = async () => {
-    const res = await axios.get(`https://api.github.com/users/${devInput}`);
-    setInfo(res.data);
+    try {
+      const res = await axios.get(`https://api.github.com/users/${devInput}`);
+      setInfo(res.data);
+    }
+    catch (err) {
+      console.log(err)
+      alert('The user does NOT exist')
+    }
   }
 
   useEffect(() => {
@@ -30,7 +36,7 @@ export function Card({devInput, setDevInput}) {
         <div className="profile">
           <div className="dev">
             <h2 className="name">{info.name}</h2>
-            <h5 className="username"><a target="_blank" href={`http://github.com/${info.login}`}>@{info.login}</a></h5>
+            <h5 className="username"><a href={`http://github.com/${info.login}`}>@{info.login}</a></h5>
           </div>
           <h4 className="joined">Joined {info.created_at}</h4>
           <h5 className="bio">{verifyNull(info.bio, "bio")}</h5>
@@ -59,7 +65,12 @@ export function Card({devInput, setDevInput}) {
             {verifyNull(info.twitter_username, "twitter")}
           </h3>
           <h3 className="link">
-            {verifyNull(info.blog, "blog")}
+            <a 
+              style={{color: "#fff"}}
+              href={verifyNull(info.blog, "#")}
+            >
+              {verifyNull(info.blog, "blog")}
+            </a>
           </h3>
           <h3 className="corp">
             {verifyNull(info.company, "corp")}
