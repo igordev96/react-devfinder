@@ -1,22 +1,11 @@
-import { Header } from './components/Header';
-import { Card } from './components/Card';
-import { GlobalStyle, Container } from './styles/global';
-import { useState } from 'react';
+import { Card } from "./components/Card";
+import { GlobalStyle } from "./styles/global";
 
 export function App() {
-  const [devInput, setDevInput] = useState('igordev96');
   return (
     <>
+      <Card />
       <GlobalStyle />
-      <Container>
-        <Header
-          setDevInput={setDevInput} 
-        />
-        <Card
-          devInput={devInput}
-          setDevInput={setDevInput} 
-        />
-      </Container>
     </>
   );
 }
