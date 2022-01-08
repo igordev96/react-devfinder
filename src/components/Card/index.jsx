@@ -39,7 +39,7 @@ export function Card({ devInput }) {
               <a href={`http://github.com/${info.login}`}>@{info.login}</a>
             </h5>
           </div>
-          <h4 className="joined">Joined {info.created_at.slice(0, 10)}</h4>
+          <h4 className="joined">Joined {info.created_at}</h4>
           <h5 className="bio">{verifyNull(info.bio, "bio")}</h5>
         </div>
 
