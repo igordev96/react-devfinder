@@ -1,10 +1,6 @@
 import { Container } from "./style";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
-export function Card({ devInput }) {
-  const [info, setInfo] = useState({});
-
+export function Card({ info, date }) {
   const verifyNull = (item, txt) => {
     if (item == null) {
       return `No ${txt}`;
@@ -12,20 +8,6 @@ export function Card({ devInput }) {
       return item;
     }
   };
-
-  const getUser = async () => {
-    try {
-      const res = await axios.get(`https://api.github.com/users/${devInput}`);
-      setInfo(res.data);
-    } catch (err) {
-      console.log(err);
-      alert("The user does NOT exist");
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, [devInput]);
 
   return (
     <Container>
@@ -39,7 +21,7 @@ export function Card({ devInput }) {
               <a href={`http://github.com/${info.login}`}>@{info.login}</a>
             </h5>
           </div>
-          <h4 className="joined">Joined {info.created_at}</h4>
+          <h4 className="joined">Joined at {date}</h4>
           <h5 className="bio">{verifyNull(info.bio, "bio")}</h5>
         </div>
 
