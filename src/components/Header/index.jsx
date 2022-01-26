@@ -8,11 +8,12 @@ export function Header({ setInfo, setDate }) {
   const inputRef = useRef();
   const button = useRef();
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, [devInput]);
-
-  useEffect(() => button.current.click(), []);
+  const enterHandler = (e) => {
+    console.log(e);
+    if (e.charCode === 13) {
+      button.current.click();
+    }
+  };
 
   const getUser = async () => {
     try {
@@ -26,6 +27,12 @@ export function Header({ setInfo, setDate }) {
     }
   };
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [devInput]);
+
+  useEffect(() => button.current.click(), []);
+
   return (
     <Container>
       <GiMagnifyingGlass className="glass" />
@@ -33,6 +40,7 @@ export function Header({ setInfo, setDate }) {
         type="text"
         placeholder="Search GitHub username..."
         value={devInput}
+        onKeyPress={enterHandler}
         onChange={(el) => setDevInput(el.target.value)}
         ref={inputRef}
       />
