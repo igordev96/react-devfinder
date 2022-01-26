@@ -9,7 +9,6 @@ export function Header({ setInfo, setDate }) {
   const button = useRef();
 
   const enterHandler = (e) => {
-    console.log(e);
     if (e.charCode === 13) {
       button.current.click();
     }
